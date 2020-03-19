@@ -1,6 +1,6 @@
 Todo APP
 Angular Frontend + Nestjs Backend
-<iframe width="560" height="315" src="https://www.youtube.com/embed/QSb_DDaJmNM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Ссылка на видео](https://www.youtube.com/embed/QSb_DDaJmNM)
 
 Инструкция по выполнению урока:
 Урок будет выполнен в несколько этапов.
