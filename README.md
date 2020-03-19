@@ -9,7 +9,7 @@ Angular Frontend + Nestjs Backend<br/>
 - Пошагово переделать полученный прототип в более гибкую архитектуру
 SOLID и все дела там
 <br/>
-Шаги:
+Шаги:<br/>
 1) установить nestjs глобально (нужен npm, nodejs) <br/>
 https://docs.nestjs.com/<br/>
 npm i -g @nestjs/cli<br/>
