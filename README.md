@@ -1,27 +1,37 @@
-# Frontend
+Todo APP (Не забыть переместить в Readme.md в проект)
+Angular Frontend + Nestjs Backend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+Инструкция по выполнению урока:
+Урок будет выполнен в несколько этапов.
+- Создание проекта как можно быстрее
+ цель - показать что Angular не уступает Vuejs & Reactjs
+- Пошагово переделать полученный прототип в более гибкую архитектуру
+SOLID и все дела там
 
-## Development server
+Шаги:
+1) установить nestjs глобально (нужен npm, nodejs)
+https://docs.nestjs.com/
+npm i -g @nestjs/cli
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+2) установить проект из репозитория (нужен git)
+https://github.com/MaksymGrom/nest-todo-api
+git clone https://github.com/MaksymGrom/nest-todo-api.git backend
 
-## Code scaffolding
+3) скопировать файл ormconfig.json.sample как ormconfig.json
+указать свои настройки БД
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+4) запустить сервер mysql я это делаю через xampp
 
-## Build
+5) добавить новую БД и записать ее название в конфиг
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+6) запустить в терминале
+npm install
+npm start
+http://localhost:3000  - проект
+http://localhost:3000/swagger  - документация
 
-## Running unit tests
+7) создадим пару записей через swagger
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+8) установим angular 
+npm install -g @angular/cli (если это твой первый раз;) )
+ng new frontend
