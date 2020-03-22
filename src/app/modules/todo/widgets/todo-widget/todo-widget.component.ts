@@ -20,28 +20,31 @@ export class TodoWidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // getAll
     this.todoList$ = this.todoService.entities$;
     this.loading$ = this.todoService.loading$;
     this.todoService.getAll();
   }
 
   onCreate(): void {
-    // add
     if (this.title) {
-      this.todoService.add(this.title);
+      this.todoService.add({
+        id: null,
+        title: this.title,
+        isCompleted: false,
+      });
       this.title = '';
     }
   }
 
   onComplete(todo: Todo) {
-    // update
-    this.todoService.update(todo);
+    this.todoService.update({
+      ...todo,
+      isCompleted: !todo.isCompleted
+    });
   }
 
   onRemove(todo: Todo) {
-    // delete
-    this.todoService.remove(todo.id);
+    this.todoService.delete(todo.id);
   }
 
 }
