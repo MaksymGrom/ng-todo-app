@@ -1,0 +1,1 @@
+export const BACKEND_BASE_DOMAIN = 'http://localhost:3000/rest/';
