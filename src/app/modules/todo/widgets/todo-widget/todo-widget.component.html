@@ -6,7 +6,7 @@
 </form>
 
 <ul>
-  <li *ngFor="let todo of todoList">
+  <li *ngFor="let todo of todoList$ | async">
     <input type="checkbox"
            name="isCompleted"
            (change)="onComplete(todo)"
@@ -16,3 +16,5 @@
     <span (click)="onRemove(todo)"> Удолить!</span>
   </li>
 </ul>
+
+<span *ngIf="loading$ | async">Loading...</span>

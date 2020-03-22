@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Todo} from "../../../../todo";
+import {Todo} from "../../models/todo";
 import {HttpClient} from "@angular/common/http";
 import {BACKEND_BASE_DOMAIN} from "../../../../../env";
+import {TodoService} from "../../services/todo.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-todo-widget',
@@ -11,49 +13,35 @@ import {BACKEND_BASE_DOMAIN} from "../../../../../env";
 export class TodoWidgetComponent implements OnInit {
   public title = '';
 
-  public todoList: Todo[];
+  public todoList$: Observable<Todo[]>;
+  public loading$: Observable<boolean>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private todoService: TodoService) {
   }
 
   ngOnInit(): void {
-    this.httpClient.get<Todo[]>(BACKEND_BASE_DOMAIN + 'todo')
-      .subscribe(todoList => {
-        this.todoList = todoList;
-      })
+    // getAll
+    this.todoList$ = this.todoService.entities$;
+    this.loading$ = this.todoService.loading$;
+    this.todoService.getAll();
   }
 
   onCreate(): void {
+    // add
     if (this.title) {
-      this.httpClient.post<Todo>(
-        BACKEND_BASE_DOMAIN + 'todo',
-        {
-          title: this.title
-        }
-      ).subscribe(todo => {
-        this.todoList.push(todo);
-      });
+      this.todoService.add(this.title);
       this.title = '';
     }
   }
 
-  onComplete(todoOnComplete: Todo) {
-    this.httpClient.patch<Todo>(
-      BACKEND_BASE_DOMAIN + 'todo/' + todoOnComplete.id,
-      {
-        isCompleted: !todoOnComplete.isCompleted
-      }
-    ).subscribe((updatedTodo: Todo) => {
-      this.todoList = this.todoList.map(todo => todo.id !== updatedTodo.id ? todo : updatedTodo);
-    });
+  onComplete(todo: Todo) {
+    // update
+    this.todoService.update(todo);
   }
 
-  onRemove(todoOnDelete: Todo) {
-    this.httpClient.delete<void>(
-      BACKEND_BASE_DOMAIN + 'todo/' + todoOnDelete.id
-    ).subscribe(() => {
-      this.todoList = this.todoList.filter(todo => todo.id !== todoOnDelete.id);
-    });
+  onRemove(todo: Todo) {
+    // delete
+    this.todoService.remove(todo.id);
   }
 
 }
