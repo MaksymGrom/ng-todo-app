@@ -1,0 +1,18 @@
+<h1>Привет. С тебя подписка! :)</h1>
+
+<form action="#" (ngSubmit)="onCreate()">
+  <input type="text" name="title" [(ngModel)]="title">
+  <button [disabled]="!title">Добавить новую запись</button>
+</form>
+
+<ul>
+  <li *ngFor="let todo of todoList">
+    <input type="checkbox"
+           name="isCompleted"
+           (change)="onComplete(todo)"
+           [checked]="todo.isCompleted">
+    <span *ngIf="!todo.isCompleted">{{ todo.title }}</span>
+    <span *ngIf="todo.isCompleted"><del>{{ todo.title }}</del></span>
+    <span (click)="onRemove(todo)"> Удолить!</span>
+  </li>
+</ul>
