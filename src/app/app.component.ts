@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Todo} from "./todo";
+import {BACKEND_BASE_DOMAIN} from "../env";
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,11 @@ export class AppComponent implements OnInit {
 
   public todoList: Todo[];
 
-  private httpClient: HttpClient;
-
-  constructor(httpClient: HttpClient) {
-    this.httpClient = httpClient;
+  constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit(): void {
-    this.httpClient.get<Todo[]>('http://localhost:3000/rest/todo')
+    this.httpClient.get<Todo[]>(BACKEND_BASE_DOMAIN + 'todo')
       .subscribe(todoList => {
         this.todoList = todoList;
       })
@@ -28,7 +26,7 @@ export class AppComponent implements OnInit {
   onCreate(): void {
     if (this.title) {
       this.httpClient.post<Todo>(
-        'http://localhost:3000/rest/todo',
+        BACKEND_BASE_DOMAIN + 'todo',
         {
           title: this.title
         }
@@ -41,7 +39,7 @@ export class AppComponent implements OnInit {
 
   onComplete(todoOnComplete: Todo) {
     this.httpClient.patch<Todo>(
-      'http://localhost:3000/rest/todo/' + todoOnComplete.id,
+      BACKEND_BASE_DOMAIN + 'todo/' + todoOnComplete.id,
       {
         isCompleted: !todoOnComplete.isCompleted
       }
@@ -52,7 +50,7 @@ export class AppComponent implements OnInit {
 
   onRemove(todoOnDelete: Todo) {
     this.httpClient.delete<void>(
-      'http://localhost:3000/rest/todo/' + todoOnDelete.id
+      BACKEND_BASE_DOMAIN + 'todo/' + todoOnDelete.id
     ).subscribe(() => {
       this.todoList = this.todoList.filter(todo => todo.id !== todoOnDelete.id);
     });
