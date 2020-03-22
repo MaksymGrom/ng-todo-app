@@ -13,16 +13,17 @@ import {Observable} from "rxjs";
 export class TodoWidgetComponent implements OnInit {
   public title = '';
 
-  public todoList$: Observable<Todo[]>;
-  public loading$: Observable<boolean>;
+  public todoList$: Observable<Todo[]> = this.todoService.entities$;
+  public loading$: Observable<boolean> = this.todoService.loading$;
 
   constructor(private todoService: TodoService) {
   }
 
   ngOnInit(): void {
-    this.todoList$ = this.todoService.entities$;
-    this.loading$ = this.todoService.loading$;
-    this.todoService.getAll();
+    this.todoService.getWithQuery({
+      'limit': '10',
+      'offset': '0'
+    });
   }
 
   onCreate(): void {
